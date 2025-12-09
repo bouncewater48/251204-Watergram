@@ -2,6 +2,7 @@ package com.bounce.watergram.service;
 
 import com.bounce.watergram.common.SHA256HashingEncoder;
 import com.bounce.watergram.repository.UserRepository;
+import com.bounce.watergram.domain.User;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -37,5 +38,17 @@ public class UserService {
         }
 
     }
+
+    public User getUser(String loginId, String password) {
+
+        String encodedPassword = SHA256HashingEncoder.encode(password);
+
+        User user = userRepository.selectUser(loginId, password);
+
+        return user;
+
+    }
+
+
 
 }

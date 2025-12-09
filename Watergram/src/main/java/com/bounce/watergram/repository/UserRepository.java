@@ -1,5 +1,6 @@
 package com.bounce.watergram.repository;
 
+import com.bounce.watergram.domain.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -13,5 +14,9 @@ public interface UserRepository {
             ,@Param("email") String email);
 
     public int countByLoginId(@Param("loginId") String loginId);
+
+    public User selectUser(
+            @Param("loginId") String loginId
+            , @Param("password") String password);
 
 }
