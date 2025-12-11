@@ -40,8 +40,8 @@
                 isDuplicateId = true;
                 isDuplicateCheck = false;
 
-                $("availableText").addClass("d-none");
-                $("duplicateText").addClass("d-none");
+                $("#availableText").addClass("d-none");
+                $("#duplicateText").addClass("d-none");
             });
 
             $("#duplicateBtn").on("click", function () {
@@ -101,11 +101,6 @@
                     return;
                 }
 
-                // ID가 중복되지 않은 경우
-                // if (!isDuplicateId) {
-                //     alert("사용가능한 ID입니다!")
-                //     return;
-                // }
 
                 if (password === "") {
                     alert("비밀번호를 입력해주세요");

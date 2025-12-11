@@ -1,4 +1,4 @@
-package com.bounce.watergram.domain;
+package com.bounce.watergram.user.domain;
 
 import lombok.Getter;
 import lombok.Setter;

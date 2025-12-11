@@ -1,6 +1,6 @@
-package com.bounce.watergram.repository;
+package com.bounce.watergram.user.repository;
 
-import com.bounce.watergram.domain.User;
+import com.bounce.watergram.user.domain.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

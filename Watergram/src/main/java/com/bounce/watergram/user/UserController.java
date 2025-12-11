@@ -1,4 +1,4 @@
-package com.bounce.watergram;
+package com.bounce.watergram.user;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;

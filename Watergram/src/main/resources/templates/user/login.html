@@ -22,7 +22,7 @@
 </section>
 
     <script layout:fragment="script">
-        $("#loginForm").on("submit", function() {
+        $("#loginForm").on("submit", function(e) {
 
             // form 태그 submit 이벤트가 가지는 요청 기능을 취소
             // 해당 이벤트에 포함된 모든 기능 취소
@@ -31,23 +31,24 @@
             let id = $("#idInput").val();
             let password = $("#passwordInput").val();
 
-            if(id === "") {
+            if(id == "") {
                 alert("아이디를 입력해주세요");
                 return ;
             }
 
-            if(password === "") {
+            if(password == "") {
                 alert("비밀번호를 입력해주세요");
                 return ;
             }
 
             $.ajax({
                 type:"post"
-                , url:"user/login-process"
+                , url:"/user/login-process"
                 , data:{"loginId":id, "password":password}
                 , success:function(response) {
                     if(response.result === "success") {
                         location.href = "/Watergram/main";
+                        // location.href = "/main";
                     } else {
                         alert("아이디와 비밀번호를 확인해주세요")
                     }

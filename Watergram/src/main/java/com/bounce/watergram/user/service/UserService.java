@@ -1,14 +1,14 @@
-package com.bounce.watergram.service;
+package com.bounce.watergram.user.service;
 
 import com.bounce.watergram.common.SHA256HashingEncoder;
-import com.bounce.watergram.repository.UserRepository;
-import com.bounce.watergram.domain.User;
+import com.bounce.watergram.user.repository.UserRepository;
+import com.bounce.watergram.user.domain.User;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserService {
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
@@ -25,7 +25,11 @@ public class UserService {
 
         int count = userRepository.insertUser(loginId, encodedPassword, name, email);
 
-        return count == 1;
+        if(count == 1) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public boolean isDuplicateId(String loginId) {
@@ -42,8 +46,8 @@ public class UserService {
     public User getUser(String loginId, String password) {
 
         String encodedPassword = SHA256HashingEncoder.encode(password);
-
-        User user = userRepository.selectUser(loginId, password);
+            // encodedPassword로 해싱된 비밀번호를 그대로 사용하여 로그인에 사용
+        User user = userRepository.selectUser(loginId, encodedPassword);
 
         return user;
 

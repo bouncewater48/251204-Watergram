@@ -1,11 +1,9 @@
-package com.bounce.watergram;
+package com.bounce.watergram.user;
 
-import com.bounce.watergram.domain.User;
-import com.bounce.watergram.service.UserService;
+import com.bounce.watergram.user.domain.User;
+import com.bounce.watergram.user.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-import org.apache.ibatis.annotations.Param;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -70,8 +68,10 @@ public class UserRestController {
             resultMap.put("result", "success");
             HttpSession session = request.getSession();
 
+            // 요청마다 사용되는 정보 : 유저아이디(PK), 이름
             session.setAttribute("userId", user.getId());
-            session.setAttribute("userLoginId", user.getLogin_id());
+//            session.setAttribute("userLoginId", user.getLogin_id());
+            session.setAttribute("userName", user.getName());
 
         } else {
             resultMap.put("result", "fail");
