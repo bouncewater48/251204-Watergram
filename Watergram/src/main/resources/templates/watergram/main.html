@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/noHeader}">
+
+    <section layout:fragment="contents" class="contents d-flex justify-content-center">
+
+        <div class="d-flex">
+            <div class="d-flex flex-column justify-content-start col-3" id="left-contents">
+                <div class="d-flex align-items-center gap-2">
+                    <img src="/watergramImage/free-icon-home-16796485.png">홈
+                </div>
+                <div class="d-flex align-items-center gap-2">
+                    <img src="/watergramImage/free-icon-magnifying-glass-4475396.png">검색
+                </div>
+                <div class="d-flex align-items-center gap-2">
+                    <img src="/watergramImage/free-icon-send-17161274.png">메시지
+                </div>
+                <div class="d-flex align-items-center gap-2">
+                    <img src="/watergramImage/free-icon-love-7476949.png">알림
+                </div>
+                <div class="d-flex align-items-center gap-2">
+                    <img src="/watergramImage/free-icon-user-6803713.png">프로필
+                </div>
+            </div>
+        </div>
+
+        <!-- 메인 상단에서 작성했을 때 이를 데이터베이스에 저장하는 기능 구현할것 -->
+        <!-- post와 연결 필요, 이미지 추가는 당장은 추가X -->
+        <div id="main-contents" class="col-4">
+            <div class="col-2">
+                <div>제목</div>
+                <textarea rows="4" cols="50"></textarea>
+                <button>작성하기</button>
+            </div>
+            <div class="col-6">
+                <div class="center-content">
+                    <div>사용자명</div>
+                    <div></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="right-contents" class="col-3">
+
+        </div>
+
+    </section>
+
+</html>
