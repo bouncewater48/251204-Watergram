@@ -1,0 +1,18 @@
+package com.bounce.watergram.post.dto;
+
+import lombok.Builder;
+import lombok.Getter;
+
+@Builder
+@Getter
+public class PostDetail {
+
+    private long id;
+
+    private String contents;
+    private String imagePath;
+
+    private long userId;
+    private String longId;
+
+}

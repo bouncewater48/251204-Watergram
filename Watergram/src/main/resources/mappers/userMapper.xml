@@ -45,4 +45,19 @@
           AND `password` = #{password}
     </select>
 
+    <select id="selectUserById" parameterType="long"
+    resultType="com.bounce.watergram.user.domain.User">
+        SELECT
+            `id`
+             , `login_id`
+             , `name`
+             , `email`
+             , `created_at`
+             , `updated_at`
+        FROM
+            `user`
+        WHERE
+            id = #{id}
+    </select>
+
 </mapper>

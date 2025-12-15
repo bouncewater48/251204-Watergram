@@ -28,7 +28,11 @@ public class UserController {
         session.invalidate();
 
         return "redirect:/user/login";
+    }
 
+    @GetMapping("main")
+    public String mainContent() {
+        return "watergram/main";
     }
 
 }
