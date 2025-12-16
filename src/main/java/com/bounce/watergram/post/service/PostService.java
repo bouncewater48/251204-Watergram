@@ -48,7 +48,7 @@ public class PostService {
         return true;
     }
 
-    public List<Post> getPostList() {
+    public List<PostDetail> getPostList() {
 
         List<Post> postList = postRepository.findAll(Sort.by("id").descending());
 
@@ -64,10 +64,10 @@ public class PostService {
                     .contents(post.getContents())
                     .imagePath(post.getImagePath())
                     .userId(post.getUserId())
-                    .loginId()
+                    .loginId(user.getLogin_id())
                     .build();
             postDetailList.add(postDetail);
         }
-
+        return postDetailList;
     }
 }

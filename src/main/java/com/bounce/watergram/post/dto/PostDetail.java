@@ -13,6 +13,6 @@ public class PostDetail {
     private String imagePath;
 
     private long userId;
-    private String longId;
+    private String loginId;
 
 }
