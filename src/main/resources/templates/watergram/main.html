@@ -4,48 +4,63 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/default}">
 
-    <section layout:fragment="contents" class="contents d-flex justify-content-center">
-
-        <div class="d-flex">
-            <div class="d-flex flex-column justify-content-start col-3" id="left-contents">
-                <div class="d-flex align-items-center gap-2">
-                    <img src="/watergramImage/free-icon-home-16796485.png">홈
-                </div>
-                <div class="d-flex align-items-center gap-2">
-                    <img src="/watergramImage/free-icon-magnifying-glass-4475396.png">검색
-                </div>
-                <div class="d-flex align-items-center gap-2">
-                    <img src="/watergramImage/free-icon-send-17161274.png">메시지
-                </div>
-                <div class="d-flex align-items-center gap-2">
-                    <img src="/watergramImage/free-icon-love-7476949.png">알림
-                </div>
-                <div class="d-flex align-items-center gap-2">
-                    <img src="/watergramImage/free-icon-user-6803713.png">프로필
-                </div>
-            </div>
-        </div>
+    <section layout:fragment="contents" class="contents d-flex flex-column align-items-center">
+<!--        <div class="d-flex">-->
+<!--            <div class="d-flex flex-column justify-content-start col-3" id="left-contents">-->
+<!--                <div class="d-flex align-items-center gap-2">-->
+<!--                    <img src="/watergramImage/free-icon-home-16796485.png">홈-->
+<!--                </div>-->
+<!--                <div class="d-flex align-items-center gap-2">-->
+<!--                    <img src="/watergramImage/free-icon-magnifying-glass-4475396.png">검색-->
+<!--                </div>-->
+<!--                <div class="d-flex align-items-center gap-2">-->
+<!--                    <img src="/watergramImage/free-icon-send-17161274.png">메시지-->
+<!--                </div>-->
+<!--                <div class="d-flex align-items-center gap-2">-->
+<!--                    <img src="/watergramImage/free-icon-love-7476949.png">알림-->
+<!--                </div>-->
+<!--                <div class="d-flex align-items-center gap-2">-->
+<!--                    <img src="/watergramImage/free-icon-user-6803713.png">프로필-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
 
         <!-- 메인 상단에서 작성했을 때 이를 데이터베이스에 저장하는 기능 구현할것 -->
         <!-- post와 연결 필요, 이미지 추가는 당장은 추가X -->
-        <div id="main-contents" class="col-4">
-            <div class="col-2">
+        <div class="write-content col-4 mb-4">
+            <div class="form-area">
                 <div>제목</div>
-                <textarea rows="4" cols="100"></textarea>
-                <button>작성하기</button>
+                <textarea rows="4" class="w-100"></textarea>
+                <div class="d-flex justify-content-end">
+                    <button class="btn btn-info">작성하기</button>
+                </div>
             </div>
-            <div class="col-6">
-                <div class="center-content">
-                    <div>사용자명</div>
-                    <div></div>
+        </div>
+            <!--        -->
+        <div class="main-contents col-5">
+            <div class="center-content">
+                <div>홍길동</div>
+                <div>
+                    <div>사진</div>
+                    <div id="main-post" class="bg-secondary">
+                        <div>안녕하세요 처음 뵙겠습니다!</div>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <button type="button" class="col-3 text-center">댓글</button>
+                        <div class="d-flex">
+<!--                            <img src="/watergramImage/love.png" class="love-image">-->
+                            <i class="love-image bi bi-suit-heart-fill"></i>
+                            <button type="button" class="text-center">Like</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div id="right-contents" class="col-3">
-
-        </div>
-
     </section>
+
+    <script layout:fragment="script">
+
+    </script>
 
 </html>

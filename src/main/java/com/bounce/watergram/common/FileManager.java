@@ -11,6 +11,7 @@ import java.nio.file.Paths;
 public class FileManager {
 
     public final static String FILE_UPLOAD_PATH = "D:\\250820bouncewater\\springProject\\upload\\watergram";
+    public final static String FILE_GET_PATH = "D:\\250820bouncewater\\springProject\\project\\Watergram\\src\\main\\resources\\templates\\watergram\\watergramImage";
 
     public static String saveFile(long userId, MultipartFile file) {
 

@@ -13,6 +13,14 @@ header {
     background-color:#dddddd;
 }
 
+.main-contents {
+    margin: 1px;
+}
+
+.love-image {
+    font-size: 30px;
+}
+
 footer {
     height: 50px;
     background-color:#dddddd;
