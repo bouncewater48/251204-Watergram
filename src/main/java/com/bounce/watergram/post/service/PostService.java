@@ -1,11 +1,13 @@
 package com.bounce.watergram.post.service;
 
 import com.bounce.watergram.common.FileManager;
+import com.bounce.watergram.like.service.LikeService;
 import com.bounce.watergram.post.domain.Post;
 import com.bounce.watergram.post.dto.PostDetail;
 import com.bounce.watergram.post.repository.PostRepository;
 import com.bounce.watergram.user.domain.User;
 import com.bounce.watergram.user.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -14,16 +16,18 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.ArrayList;
 import java.util.List;
 
+//@RequiredArgsConstructor // 필수 멤버변수 를 생성자를 통해 대응
 @Service
 public class PostService {
 
     private final PostRepository postRepository;
-
     private final UserService userService;
+    private final LikeService likeService;
 
-    public PostService(PostRepository postRepository, UserService userService) {
+    public PostService(PostRepository postRepository, UserService userService, LikeService likeService) {
         this.postRepository = postRepository;
         this.userService = userService;
+        this.likeService = likeService;
     }
 
     public boolean createPost(
@@ -66,6 +70,7 @@ public class PostService {
                     .userId(post.getUserId())
                     .loginId(user.getLogin_id())
                     .build();
+
             postDetailList.add(postDetail);
         }
         return postDetailList;

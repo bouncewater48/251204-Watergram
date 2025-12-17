@@ -30,9 +30,9 @@ public class UserController {
         return "redirect:/user/login";
     }
 
-    @GetMapping("main")
-    public String mainContent() {
-        return "watergram/main";
-    }
+//    @GetMapping("main")
+//    public String mainContent() {
+//        return "watergram/main";
+//    }
 
 }

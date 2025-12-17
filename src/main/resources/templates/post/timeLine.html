@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layouts/default}">
+      layout:decorate="~{layouts/postDefault}">
 
 <section layout:fragment="contents" class="d-flex justify-content-center">
     <!-- 전체 layout -->
     <div class="main-contents">
         <!-- 입력 상자 -->
         <div class="input-box border rounded">
-            <textarea rows="4" class="form-control border-0" id="contentsInput"></textarea>
+            <textarea rows="4" cols="80" class="form-control border-0" id="contentsInput"></textarea>
             <div class="d-flex justify-content-between p-2">
                 <input type="file" id="fileInput" class="d-none">
                 <i class="bi bi-image img-icon"></i>

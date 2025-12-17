@@ -1,9 +1,6 @@
 package com.bounce.watergram.like.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.IdClass;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -16,16 +13,17 @@ import java.time.LocalDateTime;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@IdClass(Like.class)
+@IdClass(LikeId.class)
 @Table(name="`like`")
 @Entity
 public class Like {
 
     @Id
-    private long postId;
-    @Id
     private long userId;
+    @Id
+    private long postId;
     @CreationTimestamp
+    @Column(updatable = false) // 좋아요 생성 시간 변경 여부 - false,  변경 불가
     private LocalDateTime createdAt;
 
 }
