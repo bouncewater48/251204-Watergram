@@ -17,8 +17,11 @@
     <header class="d-flex justify-content-between align-item-center">
         <div>메뉴</div>
         <h2 class="ml-3">Watergram</h2>
-        <span th:if="${session.userId}"></span>
-        <a href="/user/logout">로그아웃</a>
+        <!-- 이름을 보여주는 span 태그와 로그아웃 버튼을 따로 묶어주는 div 필요! -->
+        <div th:if="${session.userId}">
+            <span th:text="${session.userName}"></span>
+            <a href="/user/logout">로그아웃</a>
+        </div>
     </header>
 
     <th:block layout:fragment="contents"></th:block>

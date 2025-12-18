@@ -3,6 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/postDefault}">
 
+<link rel="stylesheet" href="../../static/css/style2.css">
 <section layout:fragment="contents" class="d-flex justify-content-center">
     <!-- 전체 layout -->
     <div class="main-contents">
@@ -11,7 +12,7 @@
             <textarea rows="4" cols="80" class="form-control border-0" id="contentsInput"></textarea>
             <div class="d-flex justify-content-between p-2">
                 <input type="file" id="fileInput" class="d-none">
-                <i class="bi bi-image img-icon"></i>
+                <i class="bi bi-image img-icon" id="imageBtn"></i>
                 <button type="button" class="btn btn-info btn-sm" id="uploadBtn">입력</button>
             </div>
 
@@ -31,8 +32,8 @@
                     <img class="w-100" src="https://cdn.pixabay.com/photo/2025/03/06/08/25/blueberries-9450130_1280.jpg">
                 </div>
                 <div class="p-2">
-                    <i class="bi bi-heart-fill text-danger unlike-btn d-none"></i>
-                    <i class="bi bi-heart text-danger like-btn" data-post-id="${post.id}"></i>
+                    <i th:if="${post.isLike}" class="bi bi-heart-fill text-danger unlike-btn"></i>
+                    <i th:unless="${post.isLike}" class="bi bi-heart text-danger like-btn" th:data-post-id="${post.id}"></i>
 
                     <span>좋아요 <span>11</span>개</span>
                 </div>
@@ -59,7 +60,7 @@
                         <div class="input-group">
                             <input type="text" class="form-control">
                             <div class="input-group-append">
-                                <button type="button" class="btn btn-info comment-btn">게시</button>
+                                <button type="button" class="btn btn-info comment-btn" th:data-post-id="${post.id}" id="commentInput">게시</button>
                             </div>
                         </div>
                     </div>
@@ -81,7 +82,14 @@
 
 <script layout:fragment="script">
 
-    $("#likeBtn").on("click", function() {
+    $(".comment-btn").on("click", function() {
+       let postId = $(this).data("post-id");
+
+       let comment = $("#commentInput").val();
+       alert(comment);
+    });
+
+    $("#like-btn").on("click", function() {
 
         let postId = $(this).data("post-id");
 

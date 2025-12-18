@@ -7,7 +7,6 @@ import com.bounce.watergram.post.dto.PostDetail;
 import com.bounce.watergram.post.repository.PostRepository;
 import com.bounce.watergram.user.domain.User;
 import com.bounce.watergram.user.service.UserService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -52,7 +51,7 @@ public class PostService {
         return true;
     }
 
-    public List<PostDetail> getPostList() {
+    public List<PostDetail> getPostList(long userId) {
 
         List<Post> postList = postRepository.findAll(Sort.by("id").descending());
 
@@ -63,12 +62,17 @@ public class PostService {
 
             User user = userService.getUserById(post.getUserId());
 
+            int likeCount = likeService.countByPostId(post.getId());
+            boolean isLike = likeService.isLikeByPostAndUserId(post.getId(), userId);
+
             PostDetail postDetail = PostDetail.builder()
                     .id(post.getId())
                     .contents(post.getContents())
                     .imagePath(post.getImagePath())
                     .userId(post.getUserId())
                     .loginId(user.getLogin_id())
+                    .likeCount(likeCount)
+                    .isLike(isLike)
                     .build();
 
             postDetailList.add(postDetail);
