@@ -24,7 +24,7 @@ public class PostRestController {
     @PostMapping("/write")
     public Map<String, String> write(
             @RequestParam String contents
-            , @RequestParam MultipartFile imageFile
+            , @RequestParam(value="imageFile", required = false) MultipartFile imageFile
             , HttpSession session) {
 
         long userId = (Long)session.getAttribute("userId");

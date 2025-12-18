@@ -34,7 +34,13 @@ public class PostService {
             , String contents
             , MultipartFile imageFile) {
 
-        String imagePath = FileManager.saveFile(userId, imageFile);
+//        String imagePath = FileManager.saveFile(userId, imageFile);
+        String imagePath = null;
+
+//       이미지 파일이 존재할 경우에만 이미지 저장 수행
+        if (imageFile != null && !imageFile.isEmpty()) {
+            imagePath = FileManager.saveFile(userId, imageFile);
+        }
 
         Post post = Post.builder()
                 .userId(userId)
