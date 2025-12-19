@@ -17,5 +17,10 @@ public class PostDetail {
 
     private int likeCount;
     private boolean isLike;
+    
+    // 댓글 목록
+    // 댓글 작성된 리스트 필요
+
+//    private List<> commentList;
 
 }

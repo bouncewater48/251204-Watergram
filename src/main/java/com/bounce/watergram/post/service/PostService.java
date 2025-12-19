@@ -1,5 +1,7 @@
 package com.bounce.watergram.post.service;
 
+import com.bounce.watergram.comment.domains.Comment;
+import com.bounce.watergram.comment.service.CommentService;
 import com.bounce.watergram.common.FileManager;
 import com.bounce.watergram.like.service.LikeService;
 import com.bounce.watergram.post.domain.Post;
@@ -22,6 +24,7 @@ public class PostService {
     private final PostRepository postRepository;
     private final UserService userService;
     private final LikeService likeService;
+    private final CommentService commentService;
 
     public PostService(PostRepository postRepository, UserService userService, LikeService likeService) {
         this.postRepository = postRepository;
@@ -71,6 +74,8 @@ public class PostService {
             int likeCount = likeService.countByPostId(post.getId());
             boolean isLike = likeService.isLikeByPostAndUserId(post.getId(), userId);
 
+            List<Comment> commentList = commentService.getCommentList(post.getId());
+
             PostDetail postDetail = PostDetail.builder()
                     .id(post.getId())
                     .contents(post.getContents())
@@ -79,6 +84,7 @@ public class PostService {
                     .loginId(user.getLogin_id())
                     .likeCount(likeCount)
                     .isLike(isLike)
+//                    .commentList(commentList)
                     .build();
 
             postDetailList.add(postDetail);
