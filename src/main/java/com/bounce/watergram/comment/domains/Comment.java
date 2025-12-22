@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="`comment`")
+@Table(name="`comments`")
 @Entity
 public class Comment {
 
@@ -24,6 +24,11 @@ public class Comment {
     private long postId;
     private long userId;
     private String contents;
+
+    // 좋아요 기본 갯수 0개로 설정
+    @Builder.Default
+    @Column(name="`like`", nullable = false)
+    private int like = 0;
 
     @CreationTimestamp
     private LocalDateTime createdAt;

@@ -17,7 +17,7 @@ import java.util.List;
 public class CommentService {
 
     private final CommentRepository commentRepository;
-    privae final UserService userService;
+    private final UserService userService;
 
     public boolean createComment(long postId, long userId, String contents) {
 
@@ -37,7 +37,7 @@ public class CommentService {
 
     }
 
-    public List<Comment> getCommentList(long postId) {
+    public List<CommentDetail> getCommentList(long postId) {
 
         List<Comment> commentList = commentRepository.findByPostId(postId);
 

@@ -24,7 +24,7 @@
             <!-- 카드 -->
             <div class="card my-3">
                 <div class="d-flex justify-content-between p-2">
-                    <div>lecture</div>
+                    <div>Water</div>
                     <i class="bi bi-three-dots-vertical more-btn" data-toggle="modal" data-target="#moreModal"></i>
 
                 </div>
@@ -39,26 +39,20 @@
                 </div>
 
                 <div class="p-2">
-                    <b>lecture</b> <span th:text="${post.contents}">반가워!</span>
+                    <b>bounce</b> <span th:text="${post.contents}">반가워!</span>
                 </div>
                 <!-- 댓글 목록 -->
                 <div class="comment-box">
                     <div class="pl-2">댓글</div>
                     <div class="p-2">
                         <div th:each="comment:${post.commentList}">
-                            <b>watergram</b> <span th:text="${comment.contents}">우하하하하</span>
-                        </div>
-                        <div>
-                            <b>lecture</b> <span></span>
-                        </div>
-                        <div>
-                            <b>bounce</b> <span></span>
+                            <b th:text="${comment.loginId}">watergram</b> <span th:text="${comment.contents}">우하하하하</span>
                         </div>
 
                     </div>
                     <div class="d-flex justify-content-between">
                         <div class="input-group">
-                            <input type="text" class="form-control" th:id="|commentinput${post.id}|">
+                            <input type="text" class="form-control" th:id="|commentInput${post.id}|">
                             <div class="input-group-append">
                                 <button type="button" class="btn btn-info comment-btn" th:data-post-id="${post.id}">게시</button>
                             </div>
@@ -77,6 +71,32 @@
     </div>
     <!-- /전체 layout -->
 
+<!--    &lt;!&ndash; Button trigger modal &ndash;&gt;-->
+<!--    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#moreModal">-->
+<!--        Launch demo modal-->
+<!--    </button>-->
+
+<!--    &lt;!&ndash; Modal &ndash;&gt;-->
+<!--    <div class="modal fade" id="moreModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">-->
+<!--        <div class="modal-dialog modal-dialog-centered" role="document">-->
+<!--            <div class="modal-content">-->
+<!--                <div class="modal-header">-->
+<!--                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>-->
+<!--                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--                        <span aria-hidden="true">&times;</span>-->
+<!--                    </button>-->
+<!--                </div>-->
+<!--                <div class="modal-body">-->
+<!--                    ...-->
+<!--                </div>-->
+<!--                <div class="modal-footer">-->
+<!--                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
+<!--                    <button type="button" class="btn btn-primary">Save changes</button>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+
 
 </section>
 
@@ -84,13 +104,19 @@
 
     $(".comment-btn").on("click", function() {
        let postId = $(this).data("post-id");
-       let userId = $(this).data("user-id");
-       let comment = $("#commentInput" + userId + postId).val();
 
+       let comment = $("#commentInput" + postId).val();
+
+       // 댓글 작성
        $.ajax({
            type:"post"
            , url:"/post/comment/write"
-           , data:{"postId":postId, "userId":userId, "contents":comment}
+           , data:{"postId":postId, "contents":comment}
+           // contents 필수 파라미터가 응답하지 않는 상태 (댓글 작성 에러!)
+           // 400 에러, 문법 에러일 확률 매우 높음
+           // postId, comment는 제대로 정의 됨
+           // userId 란이 비어있어서 생기는 오류로 추정, long타입 자리에 String이 들어가면서 오류 발생
+
            , success:function(response) {
                if(response.result === "success") {
                     location.reload();

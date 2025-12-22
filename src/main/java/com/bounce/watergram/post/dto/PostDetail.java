@@ -1,7 +1,10 @@
 package com.bounce.watergram.post.dto;
 
+import com.bounce.watergram.comment.dto.CommentDetail;
 import lombok.Builder;
 import lombok.Getter;
+
+import java.util.List;
 
 @Builder
 @Getter
@@ -21,6 +24,6 @@ public class PostDetail {
     // 댓글 목록
     // 댓글 작성된 리스트 필요
 
-//    private List<> commentList;
+    List<CommentDetail> commentList;
 
 }
