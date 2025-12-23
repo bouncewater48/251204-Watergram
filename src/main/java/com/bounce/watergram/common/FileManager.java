@@ -11,10 +11,8 @@ import java.nio.file.Paths;
 public class FileManager {
 
     public final static String FILE_UPLOAD_PATH = "D:\\250820bouncewater\\springProject\\upload\\watergram";
-    public final static String FILE_GET_PATH = "D:\\250820bouncewater\\springProject\\project\\Watergram\\src\\main\\resources\\templates\\watergram\\watergramImage";
 
     public static String saveFile(long userId, MultipartFile file) {
-
         // 파일 이름 유지
         // 폴더를 생성해서 파일을 저장
         // 사용자 정보를 폴더 이름으로 사용 한다
@@ -29,7 +27,7 @@ public class FileManager {
 
         File directory = new File(directoryPath);
 
-        if(!directory.mkdir()) {
+        if (!directory.mkdir()) {
             // 디렉토리 생성 실패
             return null;
         }
@@ -49,14 +47,16 @@ public class FileManager {
         }
 
         // 실제 파일 저장 위치와 url 경로를 매칭하는 규칙
-        // D:\250820bouncewater\\springProject\\upload\\watergram
+        // D:\\250820bouncewater\\springProject\\upload\\watergram
         // /images/
 
-        // D:\250820bouncewater\\springProject\\upload\\watergram
+        // D:\\250820bouncewater\\springProject\\upload\\watergram/5_132900923/test.png
         // /images/5_132900923/test.png
 
         return "/images" + directoryName + "/" + file.getOriginalFilename();
-
     }
 
+    public static void removeFile (String imagePath){
+
+    }
 }

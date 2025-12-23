@@ -1,12 +1,12 @@
 package com.bounce.watergram.like.domain;
 
 
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.io.Serializable;
 
+@Builder
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode

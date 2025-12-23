@@ -1,4 +1,4 @@
-package config;
+package com.bounce.watergram.config;
 
 import com.bounce.watergram.common.FileManager;
 import org.springframework.context.annotation.Configuration;

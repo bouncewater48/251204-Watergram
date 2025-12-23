@@ -1,9 +1,13 @@
 package com.bounce.watergram.like.service;
 
 import com.bounce.watergram.like.domain.Like;
+import com.bounce.watergram.like.domain.LikeId;
 import com.bounce.watergram.like.repository.LikeRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class LikeService {
@@ -40,4 +44,33 @@ public class LikeService {
         return likeRepository.existsByPostIdAndUserId(postId, userId);
     }
 
+    public boolean deleteLike(long postId, long userId) {
+
+        LikeId likeId = LikeId.builder()
+                .postId(postId)
+                .userId(userId)
+                .build();
+
+        Optional<Like> optionalLike = likeRepository.findById(likeId);
+
+        if(optionalLike.isPresent()) {
+
+            try {
+                likeRepository.delete(optionalLike.get());
+            } catch (DataAccessException e) {
+                return false;
+            }
+
+        } else {
+            return false;
+        }
+        return true;
+    }
+
+    @Transactional
+    public void deleteLikeByPostId(long postId) {
+
+        likeRepository.deleteByPostId(postId);
+
+    }
 }

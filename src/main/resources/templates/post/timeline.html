@@ -20,25 +20,27 @@
         <!-- /입력 상자 -->
 
         <!-- 타임라인 -->
-        <div class="timeline my-4" th:each="post:${postList}">
+        <div class="timeline my-4">
             <!-- 카드 -->
-            <div class="card my-3">
+            <div class="card my-3" th:each="post:${postList}">
                 <div class="d-flex justify-content-between p-2">
-                    <div>Water</div>
-                    <i class="bi bi-three-dots-vertical more-btn" data-toggle="modal" data-target="#moreModal"></i>
+                    <div th:text="${post.loginId}">Water</div>
+                    <!--data-toggle="modal" data-target="#moreModal -->
+                    <i class="bi bi-three-dots-vertical more-btn" th:data-post-id="${post.id}"></i>
 
                 </div>
                 <div>
-                    <img class="w-100" src="https://cdn.pixabay.com/photo/2025/03/06/08/25/blueberries-9450130_1280.jpg">
+                    <img class="w-100" th:src="${post.imagePath}" src="https://cdn.pixabay.com/photo/2025/03/06/08/25/blueberries-9450130_1280.jpg">
                 </div>
                 <div class="p-2">
-                    <i th:if="${post.isLike}" class="bi bi-heart-fill text-danger unlike-btn"></i>
+                    <i th:if="${post.isLike}" class="bi bi-heart-fill text-danger unlike-btn" th:data-post-id="${post.id}"></i>
                     <i th:unless="${post.isLike}" class="bi bi-heart text-danger like-btn" th:data-post-id="${post.id}"></i>
 
                     <span>좋아요 <span>11</span>개</span>
                 </div>
 
                 <div class="p-2">
+<!--                    <b th:text="${post.loginId}">bounce</b> <span th:text="${post.contents}">반가워!</span>-->
                     <b>bounce</b> <span th:text="${post.contents}">반가워!</span>
                 </div>
                 <!-- 댓글 목록 -->
@@ -46,7 +48,8 @@
                     <div class="pl-2">댓글</div>
                     <div class="p-2">
                         <div th:each="comment:${post.commentList}">
-                            <b th:text="${comment.loginId}">watergram</b> <span th:text="${comment.contents}">우하하하하</span>
+<!--                            <b th:text="${comment.loginId}">watergram</b> <span th:text="${comment.contents}">우하하하하</span>-->
+                            <b>watergram</b> <span th:text="${comment.contents}">우하하하하</span>
                         </div>
 
                     </div>
@@ -76,31 +79,53 @@
 <!--        Launch demo modal-->
 <!--    </button>-->
 
-<!--    &lt;!&ndash; Modal &ndash;&gt;-->
-<!--    <div class="modal fade" id="moreModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">-->
-<!--        <div class="modal-dialog modal-dialog-centered" role="document">-->
-<!--            <div class="modal-content">-->
-<!--                <div class="modal-header">-->
-<!--                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>-->
-<!--                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
-<!--                        <span aria-hidden="true">&times;</span>-->
-<!--                    </button>-->
-<!--                </div>-->
-<!--                <div class="modal-body">-->
-<!--                    ...-->
-<!--                </div>-->
-<!--                <div class="modal-footer">-->
-<!--                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
-<!--                    <button type="button" class="btn btn-primary">Save changes</button>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
+
+    <div class="modal fade" id="moreModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+
+                <div class="modal-body text-center">
+                    <a href="#" id="removeBtn">삭제하기</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
 
 
 </section>
 
 <script layout:fragment="script">
+
+    $(".more-btn").on("click", function() {
+
+        let postId = $(this).data("post-id");
+
+        $("#removeBtn").data("post-id", postId);
+
+    });
+
+    $("#removeBtn").on("click", function() {
+        let postId = $(this).data("post-id");
+
+        e.preventDefault();
+
+        $.ajax({
+            type:"delete"
+            , url:"/post/remove"
+            , data:{"id":postId}
+            , success:function(response) {
+                if(response.result === "success") {
+                    location.reload();
+                } else {
+                    alert("삭제 실패!!");
+                }
+            }
+            , error:function() {
+                alert("삭제 에러!!");
+            }
+        })
+    });
 
     $(".comment-btn").on("click", function() {
        let postId = $(this).data("post-id");
@@ -128,6 +153,27 @@
                alert("댓글 작성 에러!!")
            }
        })
+    });
+
+    $(".unlike-btn").on("click", function() {
+        let postId = $(this).data("post-id");
+
+        $.ajax({
+            type:"delete"
+            , url:"/post/unlike"
+            , data:{"postId":postId}
+            , success:function(response) {
+                if(response.result === "success") {
+                    location.reload();
+                } else {
+                    alert("좋아요 취소 실패!!");
+                }
+            }
+            , error:function() {
+                alert("좋아요 취소 에러!!");
+            }
+        })
+
     });
 
     $("#like-btn").on("click", function() {
@@ -178,7 +224,6 @@
         // alert(contents)
 
         formData.append("contents", contents);
-        formData.append("imageFile", file);
 
         if(file) {
             formData.append("imageFile", file);

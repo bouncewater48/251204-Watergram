@@ -5,6 +5,7 @@ import com.bounce.watergram.comment.dto.CommentDetail;
 import com.bounce.watergram.comment.repository.CommentRepository;
 import com.bounce.watergram.user.domain.User;
 import com.bounce.watergram.user.service.UserService;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -58,5 +59,10 @@ public class CommentService {
         }
 
         return commentDetailList;
+    }
+
+    @Transactional
+    public void deleteCommentByPostId(long postId) {
+        commentRepository.deleteByPostId(postId);
     }
 }
