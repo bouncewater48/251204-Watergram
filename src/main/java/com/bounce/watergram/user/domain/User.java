@@ -1,5 +1,6 @@
 package com.bounce.watergram.user.domain;
 
+import jakarta.persistence.Column;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,7 +11,9 @@ import java.time.LocalDateTime;
 public class User {
 
     private long id;
-    private String login_id;
+
+    private String loginId;
+
     private String password;
     private String name;
     private String email;

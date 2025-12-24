@@ -75,17 +75,26 @@ public class PostService {
 
             User user = userService.getUserById(post.getUserId());
 
-            int likeCount = likeService.countByPostId(post.getId());
-            boolean isLike = likeService.isLikeByPostAndUserId(post.getId(), userId);
+            // 1. 여기서 유저 정보가 잘 나오는지 확인
+            System.out.println(">>> 유저 객체 정보: " + user);
+            System.out.println(">>> 로그인 아이디 값: " + user.getLoginId());
 
             List<CommentDetail> commentList = commentService.getCommentList(post.getId());
+
+            // 2. 댓글 리스트의 첫 번째 항목 아이디 확인 (리스트가 비어있지 않다면)
+            if (!commentList.isEmpty()) {
+                System.out.println(">>> 첫번째 댓글 작성자: " + commentList.get(0).getLoginId());
+            }
+
+            int likeCount = likeService.countByPostId(post.getId());
+            boolean isLike = likeService.isLikeByPostAndUserId(post.getId(), userId);
 
             PostDetail postDetail = PostDetail.builder()
                     .id(post.getId())
                     .contents(post.getContents())
                     .imagePath(post.getImagePath())
                     .userId(post.getUserId())
-                    .loginId(user.getLogin_id())
+                    .loginId(user.getLoginId())
                     .likeCount(likeCount)
                     .isLike(isLike)
                     .commentList(commentList)

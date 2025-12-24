@@ -40,16 +40,20 @@
                 </div>
 
                 <div class="p-2">
-<!--                    <b th:text="${post.loginId}">bounce</b> <span th:text="${post.contents}">반가워!</span>-->
-                    <b>bounce</b> <span th:text="${post.contents}">반가워!</span>
+                    <b th:text="${post.loginId}">bounce</b> <span th:text="${post.contents}">반가워!</span>
+<!--                    <b>bounce</b> <span th:text="${post.contents}">반가워!</span>-->
                 </div>
                 <!-- 댓글 목록 -->
                 <div class="comment-box">
                     <div class="pl-2">댓글</div>
                     <div class="p-2">
-                        <div th:each="comment:${post.commentList}">
-<!--                            <b th:text="${comment.loginId}">watergram</b> <span th:text="${comment.contents}">우하하하하</span>-->
-                            <b>watergram</b> <span th:text="${comment.contents}">우하하하하</span>
+                        <div th:each="comment : ${post.commentList}">
+<!--                            <p th:text="${comment}"></p>-->
+
+<!--                            <b th:text="${comment.userId}">작성자 아이디</b>-->
+                            <b th:text="${comment.loginId}">작성자 아이디</b>
+                            <span th:text="${comment.contents}">댓글 내용</span>
+<!--                            <b>watergram</b> <span th:text="${comment.contents}">우하하하하</span>-->
                         </div>
 
                     </div>

@@ -50,8 +50,8 @@ public class CommentService {
             CommentDetail commentDetail = CommentDetail.builder()
                     .id(comment.getId())
                     .userId(comment.getUserId())
-                    .loginId(user.getLogin_id())
                     .contents(comment.getContents())
+                    .loginId(user.getLoginId())
                     .build();
 
             commentDetailList.add(commentDetail);

@@ -49,11 +49,11 @@
     resultType="com.bounce.watergram.user.domain.User">
         SELECT
             `id`
-             , `login_id`
+             , `login_id` AS login_id
              , `name`
              , `email`
-             , `created_at`
-             , `updated_at`
+             , `created_at` AS created_at
+             , `updated_at` AS updated_at
         FROM
             `user`
         WHERE
