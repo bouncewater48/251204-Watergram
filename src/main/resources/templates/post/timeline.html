@@ -12,7 +12,7 @@
             <textarea rows="4" cols="80" class="form-control border-0" id="contentsInput"></textarea>
             <div class="d-flex justify-content-between p-2">
                 <input type="file" id="fileInput" class="d-none">
-                <i class="bi bi-image img-icon" id="imageBtn"></i>
+                <i class="bi bi-image img-icon btn btn-success" id="imageBtn"> 파일 업로드</i>
                 <button type="button" class="btn btn-info btn-sm" id="uploadBtn">입력</button>
             </div>
 
@@ -36,7 +36,7 @@
                     <i th:if="${post.isLike}" class="bi bi-heart-fill text-danger unlike-btn" th:data-post-id="${post.id}"></i>
                     <i th:unless="${post.isLike}" class="bi bi-heart text-danger like-btn" th:data-post-id="${post.id}"></i>
 
-                    <span>좋아요 <span>11</span>개</span>
+                    <span>좋아요 <span th:text="${post.likeCount}">11</span>개</span>
                 </div>
 
                 <div class="p-2">
@@ -59,7 +59,7 @@
                     </div>
                     <div class="d-flex justify-content-between">
                         <div class="input-group">
-                            <input type="text" class="form-control" th:id="|commentInput${post.id}|">
+                            <input type="text" class="form-control" th:id="|commentInput${post.id}|" placeholder="댓글을 입력하세요">
                             <div class="input-group-append">
                                 <button type="button" class="btn btn-info comment-btn" th:data-post-id="${post.id}">게시</button>
                             </div>
@@ -89,7 +89,7 @@
             <div class="modal-content">
 
                 <div class="modal-body text-center">
-                    <a href="#" id="removeBtn">삭제하기</a>
+                    <a href="/user/logout" id="removeBtn">삭제하기</a>
                 </div>
 
             </div>
@@ -195,12 +195,11 @@
                     alert("좋아요 실패!!");
                 }
             }
-            , fail:function() {
+            , error:function() {
                 alert("좋아요 에러!!");
             }
-        })
-
-    })
+        });
+    });
 
     $("#imageBtn").on("click", function() {
         $("#fileInput").click();
